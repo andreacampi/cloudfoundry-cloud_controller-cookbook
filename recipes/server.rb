@@ -18,7 +18,6 @@
 # limitations under the License.
 #
 
-include_recipe "cloudfoundry::user"
 include_recipe "postgresql::client"
 
 include_recipe "cloudfoundry-cloud_controller::install_deps"
