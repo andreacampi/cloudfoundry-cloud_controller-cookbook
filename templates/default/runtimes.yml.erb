@@ -1,4 +1,30 @@
 ---
+<% if cf_runtimes_include?('node08') -%>
+<% info = cf_runtimes_get('node08') %>
+<% node_path = File.dirname(info['executable']) %>
+node08:
+  version: "<%= info['version'] %>"
+  description: "<%= info['description'] %>"
+  executable: "<%= info['executable'] %>"
+  npm: /usr/bin/npm
+  version_output: "<%= info['version_output'] %>"
+  version_flag: "<%= info['version_flag'] %>"
+  environment:
+    PATH: <%= node_path %>:$PATH
+  debug_modes:
+    - run
+    - suspend
+  debug_env:
+    run:
+      - NODE_ARGS="--debug=$VCAP_DEBUG_PORT"
+    suspend:
+      - NODE_ARGS="--debug-brk=$VCAP_DEBUG_PORT"
+  status:
+    name: current
+  series: node08
+  category: node
+<%- end %>
+
 <% if cf_runtimes_include?('ruby18') -%>
 <% info = cf_runtimes_get('ruby18') %>
 <% ruby_path = File.dirname(info['executable']) %>
